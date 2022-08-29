@@ -97,7 +97,7 @@ export default function AappBar(props) {
     var styled = [
       styles.centext,
       {
-        fontSize: 16,
+        fontSize: 15,
         justifyContent: 'center',
         alignItems: 'center',
         textTransform: 'uppercase',
@@ -205,7 +205,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  centext: {},
+  centext: {
+		// backgroundColor:'red',
+		// width:'100%',
+		// marginHorizontal:20
+	},
   rightCont: {
     width: 100,
     paddingRight: 8,

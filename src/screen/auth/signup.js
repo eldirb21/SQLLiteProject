@@ -42,8 +42,8 @@ export default function Signup(props) {
       ToastAndroid.show('userName is required!', ToastAndroid.SHORT);
     } else if (Inputs.password == '') {
       ToastAndroid.show('password is required!', ToastAndroid.SHORT);
-    } else if (Inputs.image == '') {
-      ToastAndroid.show('image is required!', ToastAndroid.SHORT);
+    // } else if (Inputs.image == '') {
+    //   ToastAndroid.show('image is required!', ToastAndroid.SHORT);
     } else {
       setloading(true);
 
@@ -93,19 +93,20 @@ export default function Signup(props) {
             onChangeText={val => setInputs({...Inputs, phone: val})}
           />
           <AtextInput
-            placeholder="email"
+            placeholder="Email"
             value={Inputs.email}
             onChangeText={val => setInputs({...Inputs, email: val})}
           />
           <AtextInput
-            placeholder="userName"
+            placeholder="UserName"
             value={Inputs.userName}
             onChangeText={val =>
               setInputs({...Inputs, userName: val ? val.toLowerCase() : ''})
             }
           />
           <AtextInput
-            placeholder="password"
+            ishidden
+            placeholder="Password"
             value={Inputs.password}
             onChangeText={val =>
               setInputs({...Inputs, password: val ? val.toLowerCase() : ''})

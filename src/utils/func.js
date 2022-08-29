@@ -1,6 +1,17 @@
 const Func = {
-	//write your code here
-	
+  //write your code here
+
+  dateFormats(date) {
+    var options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: '',
+      day: 'numeric',
+    };
+
+    var today = date;
+    return today.toLocaleDateString('id-ID', options);
+  },
   convertDate(date) {
     // var date = new Date();
     var yyyy = date.getFullYear().toString();

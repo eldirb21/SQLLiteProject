@@ -8,12 +8,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Aicon from './a-icon';
 
-export default function AFloating(props) {
+export default function AFloating({
+  customStyle,
+  bacground,
+  bottom,
+  onPress,
+  iconType,
+  icon,
+  color,
+}) {
   const onFloating = () => {
-    Alert.alert('Floating action button Clicked');
+    onPress();
+    // Alert.alert('Floating action button Clicked');
   };
-  const {customStyle, bacground, bottom, icon, color} = props;
   return (
     <View style={styles.Container}>
       <TouchableOpacity
@@ -21,12 +30,11 @@ export default function AFloating(props) {
         onPress={onFloating}
         style={styles.btn_action}
       >
-        <Image
-          source={{
-            uri:
-              'https://www.techup.co.in/wp-content/uploads/2020/03/ic_cart_image.png',
-          }}
-          style={styles.btn_icon}
+        <Aicon
+          type={iconType ? iconType : 'MaterialCommunityIcons'}
+          name={icon ? icon : 'text-box-plus-outline'}
+          color="#FFF"
+          size={30}
         />
       </TouchableOpacity>
     </View>
@@ -35,10 +43,11 @@ export default function AFloating(props) {
 
 const styles = StyleSheet.create({
   Container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5F5F5',
+    // position:'absolute',
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // backgroundColor: '#F5F5F5',
   },
 
   btn_action: {
@@ -47,8 +56,8 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: 'center',
     justifyContent: 'center',
-    right: 30,
-    bottom: 30,
+    right: 20,
+    bottom: 20,
     backgroundColor: '#0B66D3',
     borderColor: '#000000',
     borderRadius: 200 / 2,

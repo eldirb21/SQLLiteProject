@@ -54,7 +54,12 @@ export default function Accountdetails(props) {
             resizeMode="cover"
             style={styles.logo}
             imageStyle={{borderRadius: 100}}
-            source={{uri: Base64.decode(data.image)}}
+            // source={{uri: Base64.decode(data.image)}}
+            source={
+              data.image
+                ? {uri: Base64.decode(data.image)}
+                : require('../../assets/logo.jpeg')
+            }
           >
             {edit && (
               <TouchableOpacity

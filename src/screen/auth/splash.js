@@ -12,7 +12,15 @@ export default function Splash(props) {
   }, []);
   const valideteSession = async () => {
     var user = await localStore.get('authUser');
+
     DB.createTable('users', db_query.tbl_user);
+    DB.createTable('article', db_query.tbl_article);
+    DB.createTable('portoProfile', db_query.tbl_porto_profile);
+    DB.createTable('experiences', db_query.tbl_experiences);
+    DB.createTable('skills', db_query.tbl_skills);
+    DB.createTable('educations', db_query.tbl_educations);
+    DB.createTable('contacts', db_query.tbl_contacts);
+
     setTimeout(() => {
       if (user != null) {
         props.navigation.replace('TabNav');

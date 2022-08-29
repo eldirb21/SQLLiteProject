@@ -274,7 +274,8 @@ dependencies {
 		implementation project(':react-native-vector-icons')
 		implementation project(':react-native-sqlite-storage')
 		implementation project(':@react-native-async-storage')
-		
+		implementation project(':react-native-fs')
+
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

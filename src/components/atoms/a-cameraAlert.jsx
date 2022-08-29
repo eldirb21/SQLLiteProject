@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Alert,
+  Modal,
   PermissionsAndroid,
   StyleSheet,
   TouchableOpacity,
@@ -24,8 +25,7 @@ var options = {
   },
 };
 
-export default function AcameraAlert(props) {
-  const {visible, onClose, onChange} = props;
+export default function AcameraAlert({visible, multiple, onClose, onChange}) {
   async function onCamera() {
     try {
       const granted = await PermissionsAndroid.request(
@@ -42,17 +42,22 @@ export default function AcameraAlert(props) {
         console.log('Camera permission given');
         launchCamera(options, res => {
           if (res.didCancel) {
-            console.log('User cancelled image picker');
+            console.log('cancelled');
           } else if (res.error) {
             console.log('ImagePicker Error: ', res.error);
           } else if (res.customButton) {
             console.log('User tapped custom button: ', res.customButton);
             Alert.alert(res.customButton);
           } else {
-            let source = res.assets.map(x => x.uri);
-            let uri = source && source.toString();
-            var base64 = Base64.encode(uri);
-            onChange(base64);
+            if (multiple) {
+              let source = res.assets.map(x => Base64.encode(x.uri));
+              onChange(source);
+            } else {
+              let source = res.assets.map(x => x.uri);
+              let uri = source && source.toString();
+              var base64 = Base64.encode(uri);
+              onChange(base64);
+            }
           }
         });
       } else {
@@ -72,16 +77,21 @@ export default function AcameraAlert(props) {
         console.log('User tapped custom button: ', res.customButton);
         Alert.alert(res.customButton);
       } else {
-        let source = res.assets.map(x => x.uri);
-        let uri = source && source.toString();
-        var base64 = Base64.encode(uri);
-        onChange(base64);
+        if (multiple) {
+          let source = res.assets.map(x => Base64.encode(x.uri));
+          onChange(source);
+        } else {
+          let source = res.assets.map(x => x.uri);
+          let uri = source && source.toString();
+          var base64 = Base64.encode(uri);
+          onChange(base64);
+        }
       }
     });
   }
   return (
     <>
-      {visible && (
+      {/* {visible && (
         <View style={styles.container}>
           <View style={styles.body}>
             <AText style={styles.text_head}>Photos</AText>
@@ -110,7 +120,37 @@ export default function AcameraAlert(props) {
             <AText style={styles.text_body}>Cancel</AText>
           </TouchableOpacity>
         </View>
-      )}
+      )} */}
+      <Modal transparent visible={visible} onRequestClose={onClose}>
+        <View style={styles.container}>
+          <View style={styles.body}>
+            <AText style={styles.text_head}>Photos</AText>
+            <View>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => onImageLibrary()}
+                style={styles.btn}
+              >
+                <AText style={styles.text_body}>From Photos</AText>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => onCamera()}
+                style={styles.btn}
+              >
+                <AText style={styles.text_body}>Take Picture</AText>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={onClose}
+            style={styles.footer}
+          >
+            <AText style={styles.text_body}>Cancel</AText>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </>
   );
 }
@@ -156,7 +196,7 @@ const styles = StyleSheet.create({
     padding: 12,
     alignItems: 'center',
     margin: 10,
-		marginVertical:4,
+    marginVertical: 4,
     borderRadius: 10,
   },
 });

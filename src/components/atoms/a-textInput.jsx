@@ -16,7 +16,7 @@ export default function AtextInput(props) {
     ishidden,
     iconWidth,
   } = props;
-  const [hiddenText, sethiddenText] = useState(true);
+  const [hiddenText, sethiddenText] = useState(false);
   return (
     <View style={[containerStyle, {marginBottom: 10}]}>
       {label && (
@@ -25,14 +25,14 @@ export default function AtextInput(props) {
         </AText>
       )}
       {iconLeft ? (
-				// <AtextInput
-				// 	iconLeft="home"
-				// 	iconWidth={50}
-				// 	ishidden
-				// 	placeholder="Password"
-				// 	value={}
-				// 	onChangeText={ }
-				// />
+        // <AtextInput
+        // 	iconLeft="home"
+        // 	iconWidth={50}
+        // 	ishidden
+        // 	placeholder="Password"
+        // 	value={}
+        // 	onChangeText={ }
+        // />
         <View
           style={{
             flexDirection: 'row',

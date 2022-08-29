@@ -140,25 +140,28 @@ export default function Account(props) {
     await localStore.delete('authUser');
     props.navigation.replace('Signin');
   };
+  console.log(data);
   return (
     <AContainer>
       <AContent scroll>
         <View style={styles.cont_logo}>
-          {data.image && (
-            <View>
-              <Image
-                resizeMode="cover"
-                style={styles.logo}
-                source={{uri: Base64.decode(data.image)}}
-              />
-              <TouchableOpacity
-                onPress={() => setcameras(!cameras)}
-                style={styles.edit_img}
-              >
-                <Aicon name="camera" type="Feather" size={16} color="#FFF" />
-              </TouchableOpacity>
-            </View>
-          )}
+          <View>
+            <Image
+              resizeMode="cover"
+              style={styles.logo}
+              source={
+                data.image
+                  ? {uri: Base64.decode(data.image)}
+                  : require('../../assets/logo.jpeg')
+              }
+            />
+            <TouchableOpacity
+              onPress={() => setcameras(!cameras)}
+              style={styles.edit_img}
+            >
+              <Aicon name="camera" type="Feather" size={16} color="#FFF" />
+            </TouchableOpacity>
+          </View>
           <AText style={{fontWeight: 'bold', color: '#FFF'}}>{data.name}</AText>
           <AText style={{color: '#FFF'}}>{data.email}</AText>
         </View>

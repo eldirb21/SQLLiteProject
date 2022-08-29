@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
 
 export default function AContent(props) {
-  var {bg, scroll, children, pd, ph, pv, containerStyle} = props;
+  var {bg, scroll, children,pt, pd, ph, pv, containerStyle} = props;
 
   var styled = [
     containerStyle,
@@ -12,12 +12,17 @@ export default function AContent(props) {
       backgroundColor: bg,
     },
   ];
-
   return scroll ? (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       showsVerticalScrollIndicator={false}
-      style={styled}
+      style={[
+        styled,
+        pd && {padding: 20},
+        ph && {paddingHorizontal: typeof ph != 'boolean' ? ph : 20},
+				pt && {paddingTop: typeof pt != 'boolean' ? pt : 20},
+        pv && {paddingVertical: 20},
+      ]}
       {...props}
     >
       <View

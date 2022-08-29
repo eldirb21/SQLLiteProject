@@ -9,34 +9,6 @@ const Tab = createBottomTabNavigator();
 export default function TabNav() {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
-  // React.useEffect(() => {
-  //   const unsubscribe = navigation.addListener('tabPress', e => {
-  //     // Prevent default behavior
-  //     e.preventDefault();
-
-  //     // Do something manually
-  //     return () => removeEventListener();
-  //   });
-  //   const keyboardDidShowListener = Keyboard.addListener(
-  //     'keyboardDidShow',
-  //     () => {
-  //       setKeyboardVisible(true); // or some other action
-  //     },
-  //   );
-  //   const keyboardDidHideListener = Keyboard.addListener(
-  //     'keyboardDidHide',
-  //     () => {
-  //       setKeyboardVisible(false); // or some other action
-  //     },
-  //   );
-
-  //   return () => {
-  //     keyboardDidHideListener.remove();
-  //     keyboardDidShowListener.remove();
-	// 		navigation.removeListener()
-  //   };
-  //   return unsubscribe;
-  // }, [navigation]);
 
   var tabBarOptions = {
     keyboardHidesTabBar: true,
@@ -61,23 +33,21 @@ export default function TabNav() {
 
           if (route.name === 'Home') {
             iconName = focused ? 'home-outline' : 'home-outline';
-            // } else if (route.name === 'Manifest') {
-            //   iconName = focused
-            //     ? 'assignment-turned-in'
-            //     : 'assignment-turned-in';
-            // } else if (route.name === 'Inbox') {
-            //   iconName = focused ? 'notifications' : 'notifications';
-          } else if (route.name === 'Account') {
+          } else if (route.name === 'Portofolio') {
             iconName = focused
-              ? 'ios-person-circle-outline'
-              : 'ios-person-circle-outline';
+              ? 'document-text-outline'
+              : 'document-text-outline';
+          } else if (route.name === 'Article') {
+            iconName = focused ? 'newspaper-outline' : 'newspaper-outline';
+          } else if (route.name === 'Account') {
+            iconName = focused ? 'person-outline' : 'person-outline';
           }
 
           return (
             <Aicon
               type="Ionicons"
               name={iconName}
-              size={29}
+              size={22}
               color={focused ? '#278F02' : 'rgba(0,0,0,0.6)'}
             />
           );
